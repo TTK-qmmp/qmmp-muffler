@@ -3,7 +3,11 @@
 
 #include <QMessageBox>
 
+#if (QMMP_VERSION_INT < 0x10700) || (0x20000 <= QMMP_VERSION_INT && QMMP_VERSION_INT < 0x20200)
 const EffectProperties EffectMufflerFactory::properties() const
+#else
+EffectProperties EffectMufflerFactory::properties() const
+#endif
 {
     EffectProperties properties;
     properties.name = tr("Voice Removal Plugin");
@@ -17,10 +21,18 @@ Effect *EffectMufflerFactory::create()
     return new MufflerPlugin();
 }
 
+#if (QMMP_VERSION_INT < 0x10700) || (0x20000 <= QMMP_VERSION_INT && QMMP_VERSION_INT < 0x20200)
 void EffectMufflerFactory::showSettings(QWidget *parent)
 {
-   Q_UNUSED(parent);
+    Q_UNUSED(parent);
 }
+#else
+QDialog *EffectMufflerFactory::createSettings(QWidget *parent)
+{
+    Q_UNUSED(parent);
+    return nullptr;
+}
+#endif
 
 void EffectMufflerFactory::showAbout(QWidget *parent)
 {
