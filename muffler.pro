@@ -7,10 +7,14 @@ greaterThan(QT_MAJOR_VERSION, 5){
 }
 
 HEADERS += mufflerplugin.h \
-           effectmufflerfactory.h
+           effectmufflerfactory.h \
+           settingsdialog.h
 
 SOURCES += mufflerplugin.cpp \
-           effectmufflerfactory.cpp
+           effectmufflerfactory.cpp \
+           settingsdialog.cpp
+
+FORMS += settingsdialog.ui
 
 #CONFIG += BUILD_PLUGIN_INSIDE
 contains(CONFIG, BUILD_PLUGIN_INSIDE){
